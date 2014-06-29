@@ -1,5 +1,5 @@
 class system::packages {
-	$php-packages = [
+	$php_packages = [
 		'php5-cli',
 		'php5-curl',
 		'php5-fpm',
@@ -16,7 +16,7 @@ class system::packages {
 		'php5-xsl'
 	]
 
-	package { $php-packages:
+	package { $php_packages:
 		ensure => installed
 	}
 
