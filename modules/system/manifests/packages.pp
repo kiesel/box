@@ -32,6 +32,7 @@ class system::packages {
 		'tmux',
 		'screen',
 		'htop',
+		'curl'
 	]
 
 	package { $packages:

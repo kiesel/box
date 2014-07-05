@@ -4,6 +4,7 @@ class user::kiesel {
 	user { 'kiesel':
 		ensure 		=> present,
 		managehome 	=> true,
+		shell 		=> '/usr/bin/zsh'
 	}
 
 	ssh_authorized_key { 'kiesel-ssh':
@@ -36,5 +37,23 @@ class user::kiesel {
 		refreshonly	=> true,
 		subscribe	=> User['kiesel'],
 		require 	=> [User['kiesel'], Package['samba']]
+	}
+
+	exec { 'setup-oh-my-zsh':
+		command 	=> "/usr/bin/git clone git://github.com/robbyrussell/oh-my-zsh.git /home/kiesel/.oh-my-zsh",
+		cwd 		=> "/home/kiesel",
+		user 		=> "kiesel",
+		creates 	=> "/home/kiesel/.oh-my-zsh",
+		require  	=> [Package['git']],
+		logoutput	=> "true"
+	}
+
+	file { 'kiesel-zshrc':
+		ensure 		=> present,
+		source 		=> "puppet:///modules/user/.zshrc",
+		path 		=> '/home/kiesel/.zshrc',
+		mode 		=> 0644,
+		owner 		=> "kiesel",
+		group 		=> "kiesel"
 	}
 }

@@ -1,5 +1,5 @@
 class system::samba {
-	package { ['samba', 'samba-client']:
+	package { ['samba', 'smbclient']:
 		ensure => installed
 	}
 
