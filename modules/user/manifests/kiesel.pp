@@ -56,4 +56,13 @@ class user::kiesel {
 		owner 		=> "kiesel",
 		group 		=> "kiesel"
 	}
+
+	file { 'kiesel-sudoers':
+		ensure 		=> present,
+		content		=> "# Managed by puppet\nkiesel ALL=(ALL) NOPASSWD:ALL\n",
+		path 		=> '/etc/sudoers.d/kiesel',
+		mode 		=> 0660,
+		owner 		=> root,
+		group 		=> root
+	}
 }
