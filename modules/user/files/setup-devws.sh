@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e -u 
+set -e -u
 
 figlet "DevWS for $USER"
 
@@ -14,7 +14,16 @@ fi
 alias git=hub
 
 cd $HOME/dev
+if [ ! -d $HOME/dev/dotfiles ]; then
+	git clone dotfiles
+fi
+
+cd $HOME/dev
 if [ ! -d $HOME/dev/xp-framework ]; then
 	git clone xp-framework/xp-framework
-fi 
+fi
 
+if [ ! -e $HOME/bin/xp ]; then
+	cd $HOME/bin
+	wget 'http://xp-framework.net/downloads/releases/bin/setup' -O - | php
+fi

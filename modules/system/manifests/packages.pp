@@ -21,19 +21,23 @@ class system::packages {
 	}
 
 	$packages = [
-		'realpath',
-		'openjdk-7-jdk',
-		'openjdk-7-jre',
+		'curl',
+		'figlet',
 		'git',
 		'git-svn',
-		'zsh',
-		'subversion',
-		'maven',
-		'tmux',
-		'screen',
 		'htop',
-		'curl',
-		'figlet'
+		'jq',
+		'maven',
+		'netcat-openbsd',
+		'openjdk-7-jdk',
+		'openjdk-7-jre',
+		'rake',
+		'realpath',
+		'subversion',
+		'tmux',
+		'tree',
+		'wget',
+		'zsh',
 	]
 
 	package { $packages:
