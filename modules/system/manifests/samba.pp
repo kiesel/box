@@ -10,4 +10,8 @@ class system::samba {
 		source 		=> "puppet:///modules/system/smb.conf",
 		require 	=> Package['samba']
 	}
+
+	service { ['nmbd', 'smbd']:
+		ensure		=> running
+	}
 }

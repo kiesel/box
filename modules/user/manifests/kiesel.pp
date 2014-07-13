@@ -32,10 +32,10 @@ class user::kiesel {
 	}
 
 	exec { 'samba-add-kiesel':
-		command 	=> "/usr/bin/smbpasswd -a kiesel -n",
+		command 	=> "/bin/bash -c '(echo;echo) | /usr/bin/smbpasswd -a kiesel -s'",
 		user 		=> "root",
 		refreshonly	=> true,
-		subscribe	=> User['kiesel'],
+		subscribe	=> [User['kiesel'], File['/etc/samba/smb.conf']],
 		require 	=> [User['kiesel'], Package['samba']]
 	}
 
