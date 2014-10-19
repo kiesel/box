@@ -3,6 +3,7 @@ class user::kiesel {
 
 	user { 'kiesel':
 		ensure 		=> present,
+		groups 		=> ['sudo', 'docker'],
 		managehome 	=> true,
 		shell 		=> '/usr/bin/zsh'
 	}

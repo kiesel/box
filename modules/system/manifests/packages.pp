@@ -17,11 +17,12 @@ class system::packages {
 	]
 
 	package { $php_packages:
-		ensure => installed
+		ensure => latest
 	}
 
 	$packages = [
 		'curl',
+		'docker.io',
 		'figlet',
 		'git',
 		'git-svn',
@@ -31,9 +32,11 @@ class system::packages {
 		'netcat-openbsd',
 		'openjdk-7-jdk',
 		'openjdk-7-jre',
+		'python-pip',
 		'rake',
 		'realpath',
 		'subversion',
+		'tig',
 		'tmux',
 		'tree',
 		'wget',
@@ -41,6 +44,6 @@ class system::packages {
 	]
 
 	package { $packages:
-		ensure => installed
+		ensure => latest
 	}
 }
