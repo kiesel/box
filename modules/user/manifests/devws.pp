@@ -13,6 +13,7 @@ class user::devws {
 		user 		=> 'kiesel',
 		cwd			=> '/home/kiesel',
 		require 	=> File['setup-devws.sh'],
+		creates     => '/home/kiesel/.homesick/repos/dotfiles',
 		logoutput	=> true,
 		environment => [
 			'USER=kiesel',

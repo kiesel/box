@@ -39,24 +39,6 @@ class user::kiesel {
 		require 	=> [User['kiesel'], Package['samba']]
 	}
 
-	exec { 'setup-oh-my-zsh':
-		command 	=> "/usr/bin/git clone git://github.com/robbyrussell/oh-my-zsh.git /home/kiesel/.oh-my-zsh",
-		cwd 		=> "/home/kiesel",
-		user 		=> "kiesel",
-		creates 	=> "/home/kiesel/.oh-my-zsh",
-		require  	=> [Package['git']],
-		logoutput	=> "true"
-	}
-
-	file { 'kiesel-zshrc':
-		ensure 		=> present,
-		source 		=> "puppet:///modules/user/.zshrc",
-		path 		=> '/home/kiesel/.zshrc',
-		mode 		=> 0644,
-		owner 		=> "kiesel",
-		group 		=> "kiesel"
-	}
-
 	file { 'kiesel-sudoers':
 		ensure 		=> present,
 		content		=> "# Managed by puppet\nkiesel ALL=(ALL) NOPASSWD:ALL\n",

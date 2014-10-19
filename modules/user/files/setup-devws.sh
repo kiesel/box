@@ -2,26 +2,19 @@
 
 set -e -u
 
-figlet "DevWS for $USER"
+echo "===> Setting up development workspace ..."
 
-cd $HOME/dev
-if [ ! -d $HOME/dev/hub ]; then
-	git clone https://github.com/github/hub.git
-	cd hub
-	rake install prefix=$HOME/
+if [ ! -d $HOME/.homesick/repos/homeshick ]; then
+	git clone git://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 fi
 
-alias git=hub
+source $HOME/.homesick/repos/homeshick/homeshick.sh
 
-cd $HOME/dev
-if [ ! -d $HOME/dev/dotfiles ]; then
-	git clone dotfiles
-fi
-
-cd $HOME/dev
-if [ ! -d $HOME/dev/xp-framework ]; then
-	git clone xp-framework/xp-framework
-fi
+[ ! -d ~/.homesick/repos/oh-my-zsh ] && homeshick -b -f clone robbyrussell/oh-my-zsh
+[ ! -d ~/.homesick/repos/dotfiles ] && {
+	homeshick -b -f clone kiesel/dotfiles
+	sh -c "cd ~/.homesick/repos/dotfiles/ ; git remote add upstream git@github.com:kiesel/dotfiles.git"
+}
 
 if [ ! -e $HOME/bin/xp ]; then
 	cd $HOME/bin
