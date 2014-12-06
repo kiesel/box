@@ -39,6 +39,7 @@ class system::packages {
 		'tig',
 		'tmux',
 		'tree',
+		'unattended-upgrades',
 		'wget',
 		'zsh',
 	]
