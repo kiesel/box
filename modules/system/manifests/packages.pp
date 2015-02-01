@@ -35,6 +35,7 @@ class system::packages {
 		'python-pip',
 		'rake',
 		'realpath',
+		'silversearcher-ag',
 		'subversion',
 		'tig',
 		'tmux',
