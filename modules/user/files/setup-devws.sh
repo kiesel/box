@@ -18,5 +18,15 @@ source $HOME/.homesick/repos/homeshick/homeshick.sh
 
 if [ ! -e $HOME/bin/xp ]; then
 	cd $HOME/bin
-	wget 'http://xp-framework.net/downloads/releases/bin/setup' -O - | php
+	wget 'https://github.com/xp-framework/xp-runners/releases/download/v5.2.0/setup' -O - | php
 fi
+
+# Generate xp.ini
+grep -q 'PLEASE EDIT' ~/bin/xp.ini || {
+  IFS=$'\r\n' PTH=($(find ~/dev/xp6 -maxdepth 2 -name '*.pth' | xargs -n 1 dirname | sed -e "s#$HOME#~#g"))
+  # for E in $PTH; do echo -n "$E:"; done
+}
+
+[ -e ~/bin/composer ] || {
+  curl -sS https://getcomposer.org/installer | php -- --install-dir=$HOME/bin/ --filename=composer
+}
