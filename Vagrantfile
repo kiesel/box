@@ -12,6 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "forwarded_port", guest: 80, host: 80
   config.vm.network "forwarded_port", guest: 445, host: 445
+  config.vm.network "forwarded_port", guest: 3306, host: 3306
+  config.vm.network "forwarded_port", guest: 5432, host: 5432
+
 
 
   # Create a public network, which generally matched to bridged network.
@@ -40,10 +43,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
 
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "manifests"
-    puppet.module_path    = "modules"
-    puppet.manifest_file  = "site.pp"
-    puppet.options        = "--verbose"
-  end
+  #config.vm.provision "puppet" do |puppet|
+  #  puppet.manifests_path = "manifests"
+  #  puppet.module_path    = "modules"
+  #  puppet.manifest_file  = "site.pp"
+  #  puppet.options        = "--verbose"
+  #end
+
+  config.vm.provision "shell", path: "run-ansible.sh", privileged: false
 end
