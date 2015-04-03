@@ -4,5 +4,5 @@
     - common
     # - webserver
     - samba
-    - dev-php
+    - dev
     - personalize
