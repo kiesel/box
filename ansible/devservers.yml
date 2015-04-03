@@ -4,5 +4,6 @@
     - common
     # - webserver
     - samba
+    - personalize
     #- development-php
     #- development-python
