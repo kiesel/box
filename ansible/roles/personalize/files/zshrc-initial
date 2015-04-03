@@ -1,0 +1,11 @@
+[[ ${-#*i} != ${-} ]] && {
+  echo 'Current SSH identities:'
+  ssh-add -l
+  echo
+
+  echo 'You seem not to have completed environment setup.'
+  echo 'Please run:'
+  echo
+  echo '$ bin/setup.sh'
+  echo
+}

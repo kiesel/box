@@ -18,3 +18,12 @@
     creates: "/etc/samba/user-{{ host_user }}.provisioned"
   notify:
     - restart samba
+
+- name: Create bin/
+  file: path="/home/{{ host_user }}/bin" state=directory owner={{ host_user }} group={{ host_user }} mode=0700
+
+- name: Copy setup script
+  copy: src=setup.sh dest="/home/{{ host_user }}/bin/setup.sh" mode=0755 owner="{{ host_user }}" group={{ host_user }}
+
+- name: Register initial zshrc
+  copy: src=zshrc-initial dest="/home/{{ host_user }}/.zshrc" owner="{{ host_user }}" group={{ host_user }} force=no
