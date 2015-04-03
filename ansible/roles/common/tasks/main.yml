@@ -19,3 +19,12 @@
     - unattended-upgrades
     - wget
     - zsh
+
+- name: Enable vim as default editor
+  command: /usr/bin/update-alternatives --set editor /usr/bin/vim.basic
+
+- name: Add cron for unattended-upgrades after reboot
+  cron: state=present job=/usr/bin/unattended-upgrades name='Upgrades after Reboot' reboot=yes
+
+- name: Add cron for unattended-upgrades regularly
+  cron: state=present job=/usr/bin/unattended-upgrades name='Regular upgrades' hour=11 minute=0
