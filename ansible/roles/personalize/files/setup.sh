@@ -28,6 +28,10 @@ grep -q 'PLEASE EDIT' ~/bin/xp.ini || {
   # for E in $PTH; do echo -n "$E:"; done
 }
 
-[ -e ~/bin/composer ] || {
+which composer || {
   curl -sS https://getcomposer.org/installer | php -- --install-dir=$HOME/bin/ --filename=composer
+}
+
+which dolly || {
+  sudo pip install dolly
 }
