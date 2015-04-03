@@ -11,3 +11,10 @@
 
 - name: Ensure registration of personal user as passwordless root-sudoer
   template: dest="/etc/sudoers.d/{{ host_user }}" src=sudoers.j2 validate='visudo -cf %s' owner=root group=root
+
+- name: Provision user to Samba
+  shell: "(echo;echo) | /usr/bin/smbpasswd -a {{ host_user }} -s && touch /etc/samba/user-{{ host_user }}.provisioned"
+  args:
+    creates: "/etc/samba/user-{{ host_user }}.provisioned"
+  notify:
+    - restart samba

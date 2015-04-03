@@ -8,8 +8,8 @@
 - name: Provide Samba service configuration
   copy: src=smb.conf dest=/etc/samba/smb.conf owner=root group=root
 
-- name: Ensure smbd running
-  service: name=smbd state=started
-
-- name: Ensure nmbd running
-  service: name=nmbd state=started
+- name: Ensure samba running
+  service: name={{ item }} state=started
+  with_items:
+    - smbd
+    - nmbd
