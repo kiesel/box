@@ -12,4 +12,5 @@ which ansible >/dev/null || {
 }
 
 echo "===> Running ansible-playbook"
-sudo ansible-playbook /vagrant/site.yml -i /vagrant/hosts --connection=local /vagrant/playbooks/playbook.yml
+sudo cp /vagrant/ansible/hosts /etc/ansible/hosts && sudo chmod 666 /etc/ansible/hosts
+sudo ansible-playbook --connection=local /vagrant/ansible/site.yml
