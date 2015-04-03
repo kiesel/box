@@ -1,0 +1,21 @@
+---
+- name: Ensure availability of base packages
+  apt: name={{ item }} state=present
+  with_items:
+    - cowsay
+    - curl
+    - figlet
+    - git
+    - git-svn
+    - htop
+    - jq
+    - maven
+    - netcat-openbsd
+    - openjdk-7-jdk
+    - realpath
+    - subversion
+    - tmux
+    - tree
+    - unattended-upgrades
+    - wget
+    - zsh

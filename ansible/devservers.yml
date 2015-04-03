@@ -3,6 +3,6 @@
   roles:
     - common
     # - webserver
-    #- samba
+    - samba
     #- development-php
     #- development-python
