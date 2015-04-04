@@ -14,4 +14,4 @@ echo "===> Running ansible-playbook"
 # bit set, ansible tries to interpret it by running it; given the host is a Windows system
 # you cannot reliably change the file's mode, therefore copy it into the machine
 sudo cp /vagrant/ansible/hosts /etc/ansible/hosts && sudo chmod 666 /etc/ansible/hosts
-sudo PYTHONUNBUFFERED=1 ansible-playbook --connection=local /vagrant/ansible/site.yml
+sudo PYTHONUNBUFFERED=1 ANSIBLE_NOCOWS=1 ansible-playbook --connection=local /vagrant/ansible/site.yml

@@ -31,3 +31,5 @@
 
 - name: Add cron for unattended-upgrades regularly
   cron: state=present job=/usr/bin/unattended-upgrades name='Regular upgrades' hour=11 minute=0
+
+- include: docker.yml
