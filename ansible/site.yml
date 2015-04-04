@@ -1,2 +1,8 @@
 ---
-- include: devservers.yml
+- hosts: localhost
+  roles:
+    - common
+    # - webserver
+    - samba
+    - dev
+    - personalize
