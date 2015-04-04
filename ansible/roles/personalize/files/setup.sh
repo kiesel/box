@@ -17,10 +17,9 @@ source $HOME/.homesick/repos/homeshick/homeshick.sh
 
 homeshick link --force
 
-if [ ! -e $HOME/bin/xp ]; then
-	cd $HOME/bin
-	wget 'https://github.com/xp-framework/xp-runners/raw/master/setup' -O - | php
-fi
+which xpcli >/dev/null || {
+	curl -Ls 'https://github.com/xp-framework/xp-runners/raw/master/setup' | php -- -d $HOME/bin
+}
 
 # Generate xp.ini
 grep -q 'PLEASE EDIT' ~/bin/xp.ini || {
@@ -28,10 +27,15 @@ grep -q 'PLEASE EDIT' ~/bin/xp.ini || {
   # for E in $PTH; do echo -n "$E:"; done
 }
 
-which composer || {
+which composer >/dev/null || {
   curl -sS https://getcomposer.org/installer | php -- --install-dir=$HOME/bin/ --filename=composer
 }
 
-which dolly || {
+which dolly >/dev/null || {
   sudo pip install dolly
+}
+
+which expl >/dev/null || {
+  git clone https://github.com/kiesel/wormhole $HOME/wormhole
+  cd $HOME/wormhole && ./install.sh guest
 }
