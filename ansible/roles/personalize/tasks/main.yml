@@ -1,6 +1,6 @@
 ---
 - name: Ensure availability of personal user
-  user: name="{{ host_user }}" shell="{{ host_user_shell }}" groups=sudo state=present
+  user: name="{{ host_user }}" shell="{{ host_user_shell }}" groups=sudo,docker state=present
 
 - name: Ensure availability of personal SSH key(s) for personal user
   authorized_key: user="{{ item }}" key="{{ host_user_ssh_key }}"
