@@ -1,0 +1,29 @@
+---
+- name: Ensure availability of personal user
+  user: name="{{ host_user }}" shell="{{ host_user_shell }}" groups=sudo,docker state=present
+
+- name: Ensure availability of personal SSH key(s) for personal user
+  authorized_key: user="{{ item }}" key="{{ host_user_ssh_key }}"
+  with_items:
+    - "{{ host_user }}"
+    - vagrant
+    - root
+
+- name: Ensure registration of personal user as passwordless root-sudoer
+  template: dest="/etc/sudoers.d/{{ host_user }}" src=sudoers.j2 validate='visudo -cf %s' owner=root group=root
+
+- name: Provision user to Samba
+  shell: "(echo;echo) | /usr/bin/smbpasswd -a {{ host_user }} -s && touch /etc/samba/user-{{ host_user }}.provisioned"
+  args:
+    creates: "/etc/samba/user-{{ host_user }}.provisioned"
+  notify:
+    - restart samba
+
+- name: Create bin/
+  file: path="/home/{{ host_user }}/bin" state=directory owner={{ host_user }} group={{ host_user }} mode=0700
+
+- name: Copy setup script
+  copy: src=setup.sh dest="/home/{{ host_user }}/bin/setup.sh" mode=0755 owner="{{ host_user }}" group={{ host_user }}
+
+- name: Register initial zshrc
+  copy: src=zshrc-initial dest="/home/{{ host_user }}/.zshrc" owner="{{ host_user }}" group={{ host_user }} force=no

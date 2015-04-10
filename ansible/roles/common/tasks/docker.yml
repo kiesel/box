@@ -1,0 +1,5 @@
+---
+- name: Ensure docker repo availability
+  shell: "curl https://get.docker.com/ | sh"
+  args:
+    creates: /usr/bin/docker

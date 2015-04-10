@@ -12,14 +12,14 @@ source $HOME/.homesick/repos/homeshick/homeshick.sh
 
 [ ! -d ~/.homesick/repos/oh-my-zsh ] && homeshick -b -f clone robbyrussell/oh-my-zsh
 [ ! -d ~/.homesick/repos/dotfiles ] && {
-	homeshick -b -f clone kiesel/dotfiles
-	sh -c "cd ~/.homesick/repos/dotfiles/ ; git remote add upstream git@github.com:kiesel/dotfiles.git"
+	homeshick -b -f clone git@github.com:kiesel/dotfiles.git
 }
 
-if [ ! -e $HOME/bin/xp ]; then
-	cd $HOME/bin
-	wget 'https://github.com/xp-framework/xp-runners/releases/download/v5.2.0/setup' -O - | php
-fi
+homeshick link --force
+
+which xpcli >/dev/null || {
+	curl -Ls 'https://github.com/xp-framework/xp-runners/raw/master/setup' | php -- -d $HOME/bin
+}
 
 # Generate xp.ini
 grep -q 'PLEASE EDIT' ~/bin/xp.ini || {
@@ -27,6 +27,15 @@ grep -q 'PLEASE EDIT' ~/bin/xp.ini || {
   # for E in $PTH; do echo -n "$E:"; done
 }
 
-[ -e ~/bin/composer ] || {
+which composer >/dev/null || {
   curl -sS https://getcomposer.org/installer | php -- --install-dir=$HOME/bin/ --filename=composer
+}
+
+which dolly >/dev/null || {
+  sudo pip install dolly
+}
+
+which expl >/dev/null || {
+  git clone https://github.com/kiesel/wormhole $HOME/wormhole
+  cd $HOME/wormhole && ./install.sh guest
 }
