@@ -10,6 +10,8 @@
     - figlet
     - git
     - git-svn
+    - gnupg
+    - gnupg-agent
     - htop
     - jq
     - maven
