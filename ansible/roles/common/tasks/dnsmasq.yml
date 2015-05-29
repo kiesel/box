@@ -1,0 +1,9 @@
+---
+- name: Install dnsmasq
+  apt: name=dnsmasq state=present
+
+- name: Provide Samba service configuration
+  copy: src=dnsmasq.d/ dest=/etc/dnsmasq.d/ owner=root group=root
+
+- name: Run dnsmasq
+  service: name=dnsmasq state=started
