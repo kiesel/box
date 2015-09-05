@@ -1,3 +1,4 @@
 ---
 - include: php.yml
 - include: python.yml
+- include: go.yml
