@@ -6,7 +6,7 @@
   authorized_key: user="{{ item }}" key="{{ host_user_ssh_key }}"
   with_items:
     - "{{ host_user }}"
-    - vagrant
+    - ubuntu
     - root
 
 - name: Ensure registration of personal user as passwordless root-sudoer

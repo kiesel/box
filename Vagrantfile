@@ -5,10 +5,10 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
   # config.vm.box_check_update = false
   config.vm.network "private_network", ip: "192.168.1.10"
-  config.vm.hostname = "box"
+  config.vm.hostname = "box-xenial"
 
   config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 80, host: 80
   config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 445, host: 445
@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "box"
+    vb.name = "box-xenial"
     # vb.gui = true
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end

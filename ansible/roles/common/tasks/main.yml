@@ -5,24 +5,18 @@
 - name: Ensure availability of base packages
   apt: name={{ item }} state=present
   with_items:
-    - cowsay
     - curl
-    - figlet
     - git
-    - git-svn
     - gnupg
     - gnupg-agent
     - htop
     - jq
-    - maven
     - netcat-openbsd
-    - openjdk-7-jdk
+    - openjdk-8-jdk
     - realpath
-    - subversion
     - tmux
     - tree
     - unattended-upgrades
-    - wget
     - zsh
 
 - name: Enable vim as default editor
