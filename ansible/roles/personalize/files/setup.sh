@@ -10,7 +10,7 @@ fi
 
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 
-[ ! -d ~/.homesick/repos/oh-my-zsh ] && homeshick -b -f clone robbyrussell/oh-my-zsh
+[ ! -d ~/.homesick/repos/zgen ] && homeshick -b -f clone tarjoilija/zgen
 [ ! -d ~/.homesick/repos/dotfiles ] && {
 	homeshick -b -f clone git@github.com:kiesel/dotfiles.git
 }

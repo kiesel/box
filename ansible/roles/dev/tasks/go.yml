@@ -1,5 +1,5 @@
 ---
 - name: Install Go
-  shell: curl https://storage.googleapis.com/golang/go1.5.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+  shell: curl https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz | tar -C /usr/local -xzf -
   args:
     creates: /usr/local/go/bin/go

@@ -22,6 +22,7 @@
     - tmux
     - tree
     - unattended-upgrades
+    - vim
     - wget
     - zsh
 
