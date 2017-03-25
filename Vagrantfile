@@ -5,7 +5,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "kiesel/idev-basebox-jessie64"
   # config.vm.box_check_update = false
   config.vm.network "private_network", ip: "192.168.1.10"
   config.vm.hostname = "box"
