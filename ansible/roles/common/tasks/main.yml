@@ -1,22 +1,24 @@
 ---
+- name: Ensure backports availability
+  apt_repository:
+    repo: "deb http://http.debian.net/debian {{ansible_distribution_release}}-backports main contrib non-free"
+    state: present
+
 - name: Update apt cache
   apt: update_cache=yes cache_valid_time=86400
 
 - name: Ensure availability of base packages
   apt: name={{ item }} state=present
   with_items:
-    - cowsay
     - curl
-    - figlet
     - git
     - git-svn
     - gnupg
     - gnupg-agent
     - htop
     - jq
-    - maven
+    - libxml2-utils
     - netcat-openbsd
-    - openjdk-7-jdk
     - realpath
     - subversion
     - tmux
@@ -25,6 +27,12 @@
     - vim
     - wget
     - zsh
+
+- name: Ensure availability of Java packages
+  apt: name={{ item }} state=present default_release="{{ansible_distribution_release}}-backports"
+  with_items:
+    - maven
+    - openjdk-8-jdk
 
 - name: Enable vim as default editor
   command: /usr/bin/update-alternatives --set editor /usr/bin/vim.basic
