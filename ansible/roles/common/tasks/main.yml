@@ -11,6 +11,7 @@
   apt: name={{ item }} state=present
   with_items:
     - curl
+    - dnsutils
     - git
     - git-svn
     - gnupg
@@ -20,7 +21,9 @@
     - libxml2-utils
     - netcat-openbsd
     - realpath
+    - sshfs
     - subversion
+    - tig
     - tmux
     - tree
     - unattended-upgrades
@@ -32,7 +35,7 @@
   apt: name={{ item }} state=present default_release="{{ansible_distribution_release}}-backports"
   with_items:
     - maven
-    - openjdk-8-jdk
+    - openjdk-8-jdk-headless
 
 - name: Enable vim as default editor
   command: /usr/bin/update-alternatives --set editor /usr/bin/vim.basic
@@ -44,5 +47,3 @@
   cron: state=present job=/usr/bin/unattended-upgrades name='Regular upgrades' hour=11 minute=0
 
 - include: docker.yml
-
-- include: dnsmasq.yml
