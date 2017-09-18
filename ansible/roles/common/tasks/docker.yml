@@ -3,3 +3,15 @@
   shell: "curl https://get.docker.com/ | sh"
   args:
     creates: /usr/bin/docker
+
+- name: Provide docker-compose
+  shell: "curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose"
+  args:
+    creates: /usr/local/bin/docker-compose
+
+- name: Ensure docker-compose is executable
+  file:
+    path: /usr/local/bin/docker-compose
+    owner: root
+    group: docker
+    mode: 0550
