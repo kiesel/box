@@ -18,13 +18,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 80, host: 80
   config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 443, host: 443
-  config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 445, host: 445
+  # config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 445, host: 445
   config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 3306, host: 3306
   config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: 5432, host: 5432
 
-  config.vm.synced_folder "../boxsync", "/home/dandral/sync"
-
-  for i in 9000..9010
+  for i in 10000..10010
     config.vm.network "forwarded_port", host_ip: "127.0.0.1", guest: i, host: i
   end
 
