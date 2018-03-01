@@ -5,10 +5,13 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "kiesel/idev-basebox-jessie64"
+  config.vm.box = "debian/stretch64"
   config.vm.box_check_update = false
+  config.vm.box_download_insecure = true
   # config.vm.network "private_network", ip: "192.168.1.10"
-  config.vm.hostname = "box"
+  config.vm.hostname = "stretch"
+
+  config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: ".git/"
 
   if Vagrant.has_plugin?("vagrant-proxyconf") && ENV['http_proxy']
     config.proxy.http  = "http://10.0.2.2:8888/"
@@ -29,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
 
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "box"
+    vb.name = "sbox"
     # vb.gui = true
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end

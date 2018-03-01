@@ -1,13 +1,37 @@
 ---
-- name: Ensure docker repo availability
-  shell: "curl https://get.docker.com/ | sh"
-  args:
-    creates: /usr/bin/docker
+- name: Ensure docker prereqs available
+  apt: name="{{ item }}" state=present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+
+- name: Provide Docker APT GPG key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Provide docker debian repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ansible_distribution_release}} stable"
+    update_cache: yes
+    filename: docker
+    state: present
+
+- name: Provide docker package
+  apt:
+    name: docker-ce
+    state: present
 
 - name: Provide docker-compose
-  shell: "curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose"
-  args:
-    creates: /usr/local/bin/docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.19.0/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 0550
+    owner: root
+    group: docker
 
 - name: Ensure docker-compose is executable
   file:

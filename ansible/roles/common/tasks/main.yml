@@ -7,13 +7,23 @@
 - name: Update apt cache
   apt: update_cache=yes cache_valid_time=86400
 
+- name: Provide ca-certificates
+  apt: name=ca-certificates state=present
+
+- name: Ensure availability of ZScaler certificate
+  copy:
+    src: zscaler.crt
+    dest: /usr/local/share/ca-certificates/zscaler.crt
+
+- name: Register zscaler cert
+  shell: update-ca-certificates
+
 - name: Ensure availability of base packages
   apt: name={{ item }} state=present
   with_items:
     - curl
     - dnsutils
     - git
-    - git-svn
     - gnupg
     - gnupg-agent
     - htop
@@ -22,7 +32,6 @@
     - netcat-openbsd
     - realpath
     - sshfs
-    - subversion
     - tig
     - tmux
     - tree
